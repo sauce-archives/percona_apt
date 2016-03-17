@@ -1,0 +1,18 @@
+---
+# file: percona_apt/meta/main.yml
+#
+# meta file
+#
+galaxy_info:
+  author: Pedro Salgado
+  description: Role to setup the Percona apt repository.
+  company: saucelabs.com
+  license: Sauce Labs
+  min_ansible_version: 1.9.4
+  platforms:
+    - name: Ubuntu
+      versions:
+       - trusty
+  categories:
+    - database
+dependencies: []

@@ -1,0 +1,38 @@
+---
+# file: percona_apt/tests/tasks/main.yml
+#
+# Test tasks to verify role execution.
+#
+
+- fail:
+    msg='missing percona_apt_deb_file variable'
+  when: percona_apt_deb_file is not defined
+
+- fail:
+    msg='missing percona_apt_dir_source variable'
+  when: percona_apt_dir_source is not defined
+
+- fail:
+    msg='missing percona_apt_download_url variable'
+  when: percona_apt_download_url is not defined
+
+- fail:
+    msg='missing percona_apt_version variable'
+  when: percona_apt_version is not defined
+
+- name: Percona APT source directory is present?
+  shell: "test -d {{ percona_apt_dir_source }}"
+  changed_when: no
+
+- name: Percona APT repo installer is present?
+  shell: "test -e {{ percona_apt_dir_source }}/{{ percona_apt_deb_file }}"
+  changed_when: no
+
+- name: Percona APT repo is included in the APT sources list
+  shell: "test -e /etc/apt/sources.list.d/percona-release.list"
+  changed_when: no
+
+- name: Percona APT repo pin preferences is present?
+  shell: "test -e /etc/apt/preferences.d/00percona.pref"
+  changed_when: no
+

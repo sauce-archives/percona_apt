@@ -1,0 +1,17 @@
+---
+# file: percona_apt/defaults/main.yml
+#
+# defaults file
+#
+# percona_apt_deb_file: filename for the percona_apt Linux installer.
+# percona_apt_dir_source: directory where to download the percona_apt Linux installer.
+# percona_apt_download_url: URL to download percona_apt.
+# percona_apt_version: version of percona_apt.
+#
+
+percona_apt_dir_source: '/usr/local/src'
+
+percona_apt_version: '0.1-3'
+
+percona_apt_deb_file: "percona-release_0.1-3.{{ ansible_distribution_release | lower }}_all.deb"
+percona_apt_download_url: "https://repo.percona.com/apt/{{ percona_apt_deb_file }}"

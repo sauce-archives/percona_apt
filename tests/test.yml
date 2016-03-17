@@ -1,0 +1,18 @@
+---
+# file: percona_apt/tests/test.yml
+#
+
+- name: tests play
+  hosts: all
+  gather_facts: yes
+
+  vars:
+    debug: yes
+
+  roles:
+
+    - role: percona_apt
+      tags: percona_apt
+
+    - role: tests
+      tags: test

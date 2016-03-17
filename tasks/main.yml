@@ -1,0 +1,15 @@
+---
+# file: percona_apt/tasks/main.yml
+#
+# Task to install percona_apt and setup user environments.
+#
+
+- include: debug.yml
+  when: debug | default(false)
+  tags: debug
+
+- include: validation.yml
+  tags: validation
+
+- include: setup.yml
+  tags: setup

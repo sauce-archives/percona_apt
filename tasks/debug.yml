@@ -1,0 +1,14 @@
+---
+# file: percona_apt/tasks/debug.yml
+#
+# Task to debug input variables
+#
+
+- debug:
+    var="{{ item }}"
+  when: "{{ item }} is defined"
+  with_items:
+    - percona_apt_dir_source
+    - percona_apt_version
+    - percona_apt_deb_file
+    - percona_apt_url_download

@@ -1,0 +1,36 @@
+---
+# file: percona_apt/tasks/setup.yml
+#
+# Task file to setup the Percona apt repository.
+#
+
+#
+- name: ensure the percona_apt_dir_source directory exists
+  file:
+    path="{{ percona_apt_dir_source }}"
+    state=directory
+  sudo: yes
+
+- name: download Percona APT repository installer
+  get_url:
+    url="{{ percona_apt_download_url }}"
+    dest="{{ percona_apt_dir_source }}/{{ percona_apt_deb_file }}"
+  sudo: yes
+
+- name: add the Percona APT repository to the APT sources
+  apt:
+    deb="{{ percona_apt_dir_source }}/{{ percona_apt_deb_file }}"
+  sudo: yes
+  register: percona_apt_task_repo_installed
+
+- name: update the APT cache
+  apt:
+    update_cache: yes
+  sudo: yes
+  when: percona_apt_task_repo_installed.changed
+
+- name: pin the Percona APT repository
+  copy:
+    src='etc/apt/preferences.d/00percona.pref'
+    dest='/etc/apt/preferences.d/00percona.pref'
+  sudo: yes

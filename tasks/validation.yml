@@ -1,0 +1,24 @@
+---
+# file: percona_apt/tasks/validation.yml
+#
+# Task to validate input variables
+#
+
+- name: check if operating system distribution is suported
+  fail:
+    msg: "The {{ ansible_distribution }} is not currently supported."
+  when: (ansible_distribution | lower) != 'ubuntu' and ansible_distribution | lower != 'debian'
+
+- name: check if operating system distribution release is suported
+  fail:
+    msg: "The {{ ansible_distribution }} distribution is not currently supported."
+  when: ansible_distribution_release | lower != 'jessie' and
+        ansible_distribution_release | lower != 'lucid' and
+        ansible_distribution_release | lower != 'precise' and
+        ansible_distribution_release | lower != 'saucy' and
+        ansible_distribution_release | lower != 'squeeze' and
+        ansible_distribution_release | lower != 'trusty' and
+        ansible_distribution_release | lower != 'utopic' and
+        ansible_distribution_release | lower != 'vivid' and
+        ansible_distribution_release | lower != 'wheezy' and
+        ansible_distribution_release | lower != 'wily'
