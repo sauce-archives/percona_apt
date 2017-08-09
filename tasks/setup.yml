@@ -9,28 +9,34 @@
   file:
     path="{{ percona_apt_dir_source }}"
     state=directory
-  sudo: yes
-
+  become: yes
+  become_user: root
+  
 - name: download Percona APT repository installer
   get_url:
     url="{{ percona_apt_download_url }}"
     dest="{{ percona_apt_dir_source }}/{{ percona_apt_deb_file }}"
-  sudo: yes
+  become: yes
+  become_user: root
+
 
 - name: add the Percona APT repository to the APT sources
   apt:
     deb="{{ percona_apt_dir_source }}/{{ percona_apt_deb_file }}"
-  sudo: yes
+  become: yes
+  become_user: root
   register: percona_apt_task_repo_installed
 
 - name: update the APT cache
   apt:
     update_cache: yes
-  sudo: yes
+  become: yes
+  become_user: root
   when: percona_apt_task_repo_installed.changed
 
 - name: pin the Percona APT repository
   copy:
     src='etc/apt/preferences.d/00percona.pref'
     dest='/etc/apt/preferences.d/00percona.pref'
-  sudo: yes
+  become: yes
+  become_user: root
