@@ -18,6 +18,9 @@
         ansible_distribution_release | lower != 'saucy' and
         ansible_distribution_release | lower != 'squeeze' and
         ansible_distribution_release | lower != 'trusty' and
+        ansible_distribution_release | lower != 'xenial' and
+        ansible_distribution_release | lower != 'yakkety' and
+        ansible_distribution_release | lower != 'zesty' and
         ansible_distribution_release | lower != 'utopic' and
         ansible_distribution_release | lower != 'vivid' and
         ansible_distribution_release | lower != 'wheezy' and
